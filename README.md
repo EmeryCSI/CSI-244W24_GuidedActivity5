@@ -8,9 +8,13 @@
 
 This repository is a part of CSI-244 at Renton Technical College.
 
-## Guided Activity Part 3 Bootstrap and Formdata
+Part 1 of this repository is based on the following Youtube Tutorial.
+You are welcome to follow along with this video if you would like
+https://youtu.be/xrc7dIO_tXk?si=LkkArlxPamLZWib2
+
+## Guided Activity 5 MongoDB
 1. Clone this repository to your machine.
-2. Open the repository in Visual Studio code and follow the instructions below.
+2. Open the repository in Visual Studio code.
 
 #### Step 1: Project Setup
 

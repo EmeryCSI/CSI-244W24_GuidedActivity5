@@ -53,6 +53,31 @@ MongoDB Atlast is a cloud based database service that allows you to store and re
 10. Click Load Sample Data to load some sample data into your cluster.
 11. We are now ready to connect to our cluster and run some queries.
 
+### Part 2 - Connect to your Cluster from Visual Studio Code Extension
+1. Open Visual Studio Code and open the folder for this repository.
+2. Click on the Extensions icon in the left hand menu.
+3. Search for and install the MongoDB for VS Code extension.
+
+![Image showing MongoDB for VS Code Extension](Images/6.png)
+
+4. Once the extension is installed you will see a new leaf icon in the left hand menu for MongoDB.
+5. Click on the MongoDB icon and then click on Add Connection, and then Connection String.
+6. You will need to get your connection string from the MongoDB Atlas website.
+7. Go back to the MongoDB Atlas website and click on the connect button for your cluster.
+
+![Image showing Connect Button](Images/7.png)
+
+8. Click the option to connect via Visual Studio Code.
+9. The connection string will be displayed. Click the copy button to copy the connection string to your clipboard.
+10. You need to replace the password in the connection string with the password you created for your database.
+11. Go back to Visual Studio Code and paste the connection string into the connection string box.
+12. Once you have pasted the connection string into the box, click the Connect button.
+13. You should now be connected to your MongoDB Atlas cluster with the sample data loaded.
+14. Click Create New Playground to create a new playground.
+15. You can now run queries against your database.
+
+
+
 ##### Creating Your Project
 - **Action:** Start a new Node.js project and install Express.
   - Open your terminal or command prompt.

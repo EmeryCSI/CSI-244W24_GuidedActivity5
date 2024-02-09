@@ -16,7 +16,42 @@ https://youtu.be/xrc7dIO_tXk?si=LkkArlxPamLZWib2
 1. Clone this repository to your machine.
 2. Open the repository in Visual Studio code.
 
-#### Step 1: Project Setup
+### Part 1 - Create a MongoDB Atlas Account
+MongoDB Atlast is a cloud based database service that allows you to store and retrieve data from a MongoDB database. In this part of the activity you will create a MongoDB Atlas account and create a new cluster.
+
+1. Open a web browser and navigate to the following URL
+    https://www.mongodb.com/
+2. Click on the "Try Free" button in the upper right hand corner of the page.
+3. Fill out the form to create a new account. 
+4. Once you have created your you will need verify your email address.
+5. Once you have verified your email address you will be able to log into your account.
+
+### Part 2 - Create a New Cluster
+1. Once you have logged into your account you will be taken to the MongoDB Atlas dashboard.
+2. Click the Create Button to create a new cluster.
+
+![Image showing Atlas Dashboard](Images/1.png)
+
+3. Select the free tier option, AWS as the cloud provider.
+
+![Image showing Create Cluster Screen](Images/2.png)
+
+4. Select the region closest to you and click the Create Cluster button.
+
+![Image showing Create Cluster Screen](Images/3.png)
+
+5. Choose a username and password for your database and click the Create User button.
+![Image showing Create User Screen](Images/4.png)
+
+6. Choose the option to connect from my local environment and click the add my current IP address button.
+7. Click the finish and close button.
+8. You should now see your deployed cluster in the Overview tab.
+9. If you lose this tab and need to get back to it, you can click Home, Projects, and then the name of your project. The default is "Project0".
+
+![Image showing Cluster Overview](Images/5.png)
+
+10. Click Load Sample Data to load some sample data into your cluster.
+11. We are now ready to connect to our cluster and run some queries.
 
 ##### Creating Your Project
 - **Action:** Start a new Node.js project and install Express.

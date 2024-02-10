@@ -17,55 +17,57 @@ https://youtu.be/xrc7dIO_tXk?si=LkkArlxPamLZWib2
 2. Open the repository in Visual Studio code.
 
 ### Part 1 - Create a MongoDB Atlas Account
-MongoDB Atlast is a cloud based database service that allows you to store and retrieve data from a MongoDB database. In this part of the activity you will create a MongoDB Atlas account and create a new cluster.
+MongoDB Atlas is a cloud-based database service that allows you to store and retrieve data from a MongoDB database. In this part of the activity, you will create a MongoDB Atlas account and create a new cluster.
 
-1. Open a web browser and navigate to the following URL
-    https://www.mongodb.com/
-2. Click on the "Try Free" button in the upper right hand corner of the page.
-3. Fill out the form to create a new account. 
-4. Once you have created your you will need verify your email address.
-5. Once you have verified your email address you will be able to log into your account.
+1. Open a web browser and navigate to the following URL:
+    [https://www.mongodb.com/](https://www.mongodb.com/)
+2. Click on the "Try Free" button in the upper right-hand corner of the page.
+3. Fill out the form to create a new account.
+4. Once you have created your account, you will need to verify your email address.
+5. Once you have verified your email address, you will be able to log into your account.
 
 ### Part 2 - Create a New Cluster
-1. Once you have logged into your account you will be taken to the MongoDB Atlas dashboard.
+1. Once you have logged into your account, you will be taken to the MongoDB Atlas dashboard.
 2. Click the Create Button to create a new cluster.
 
-![Image showing Atlas Dashboard](Images/1.png)
+<img src="Images/1.png" alt="Image showing Atlas Dashboard" width="50%" />
 
 3. Select the free tier option, AWS as the cloud provider.
 
-![Image showing Create Cluster Screen](Images/2.png)
+<img src="Images/2.png" alt="Image showing Create Cluster Screen" width="50%" />
 
 4. Select the region closest to you and click the Create Cluster button.
 
-![Image showing Create Cluster Screen](Images/3.png)
+<img src="Images/3.png" alt="Image showing Create Cluster Screen" width="50%" />
 
 5. Choose a username and password for your database and click the Create User button.
-![Image showing Create User Screen](Images/4.png)
+
+<img src="Images/4.png" alt="Image showing Create User Screen" width="50%" />
 
 6. Choose the option to connect from my local environment and click the add my current IP address button.
 7. Click the finish and close button.
 8. You should now see your deployed cluster in the Overview tab.
 9. If you lose this tab and need to get back to it, you can click Home, Projects, and then the name of your project. The default is "Project0".
 
-![Image showing Cluster Overview](Images/5.png)
+<img src="Images/5.png" alt="Image showing Cluster Overview" width="50%" />
 
 10. Click Load Sample Data to load some sample data into your cluster.
 11. We are now ready to connect to our cluster and run some queries.
 
 ### Part 2 - Connect to your Cluster from Visual Studio Code Extension
+
 1. Open Visual Studio Code and open the folder for this repository.
 2. Click on the Extensions icon in the left hand menu.
 3. Search for and install the MongoDB for VS Code extension.
 
-![Image showing MongoDB for VS Code Extension](Images/6.png)
+<img src="Images/6.png" alt="Image showing MongoDB for VS Code Extension" width="50%" />
 
 4. Once the extension is installed you will see a new leaf icon in the left hand menu for MongoDB.
 5. Click on the MongoDB icon and then click on Add Connection, and then Connection String.
 6. You will need to get your connection string from the MongoDB Atlas website.
 7. Go back to the MongoDB Atlas website and click on the connect button for your cluster.
 
-![Image showing Connect Button](Images/7.png)
+<img src="Images/7.png" alt="Image showing Connect Button" width="50%" />
 
 8. Click the option to connect via Visual Studio Code.
 9. The connection string will be displayed. Click the copy button to copy the connection string to your clipboard.
@@ -73,411 +75,115 @@ MongoDB Atlast is a cloud based database service that allows you to store and re
 11. Go back to Visual Studio Code and paste the connection string into the connection string box.
 12. Once you have pasted the connection string into the box, click the Connect button.
 13. You should now be connected to your MongoDB Atlas cluster with the sample data loaded.
-14. Click Create New Playground to create a new playground.
-15. You can now run queries against your database.
 
+<img src="Images/8.png" alt="Image showing air_bnb sample data" width="50%" />
 
+14. Click on the cluster and then the sample_airbnb database to see the collections in the database.
+15. There is a listingAndReviews collection that we will be using for the next part of the activity.
+16. Ckick on the listingAndReviews collection to see the data in the collection.
+17. Click on the Documents and then the first document to see the data in the document.
+18. Notice how similar the data is to a JSON object.
 
-##### Creating Your Project
-- **Action:** Start a new Node.js project and install Express.
-  - Open your terminal or command prompt.
-  - Run the following command to initialize your project:
+### Part 3 - Create a Node.js Application to Connect to MongoDB
+
+1. Open a terminal in Visual Studio Code and navigate to the folder for this repository.
+2. Run the following command to create a new Node.js application with server.js as the entry point.
     ```powershell
+    mkdir server
+    cd server
     npm init
+    new-item server.js
     ```
-  - Follow the prompts to create your project, setting `server.js` as the entry point.
-
-##### Installing Express
-- **Action:** Install Express.
-  - In the terminal, run:
+3. Run the following command to install the MongoDB driver for Node.js and nodemon.
     ```powershell
-    npm install express
-    ```
-
-##### Installing nodemon
-- **Action:** Install Nodemon, but only as a development dependency.
-  - In the terminal, run:
-    ```powershell
+    npm install mongodb
     npm install nodemon --save-dev
     ```
-
-##### Verifying package.json
-- You should now have a package.json created in the current folder. Edit the "scripts" collection to match the following.  
+4. Create a new file in the root of the project called server.js.
+5. When connecting to any database from an application your connection string should be stored in an environment variable. This is to prevent your connection string from being exposed in your code. We will use the dotenv package to store our connection string in an environment variable.
+6. Run the following command to install the dotenv package.
+    ```powershell
+    npm install dotenv
+    ```
+7. Create a new file in the root of the project called .env.
+    ```powershell
+    new-item .env
+    ```
+8. Add the following line to the .env file and replace the connection string with your connection string. DO NOT PUT QUOTES AROUND THE CONNECTION STRING.
+    ```powershell
+    CONNECTION_STRING=your-connection-string
+    ```
+9. Edit package.json to add a start script that will run the server.js file.
     ```json
-  "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js"
-      },
-
+    "scripts": {
+        "start": "node server.js",
+        "dev": "nodemon server.js"
+    },
     ```
-- You do not need to change anything else in package.json except for the "scripts" collection.
-
-##### Creating the Server File
-- **Action:** Create the main server file.
-  - In your project directory, create a file named `server.js`.
-
-#### Step 2: Setting Up the Express Server
-
-##### Writing the Server Code
-- **Setting Up Express:**
-  - Open `server.js` in a text editor.
-  - Write the following code to import necessary modules and set up the Express app:
+10. Add the following code to the server.js file.
     ```javascript
-    const express = require("express");
-    const path = require("path");
-    const fs = require("fs");
-    const app = express();
-    ```
-
-- **Serving HTML Pages:**
-  - Define routes to serve your `index.html` and `support.html` pages using `res.sendFile`. For example:
-    ```javascript
-    // Serve index.html on the root path
-    app.get("/", (req, res) => {
-      res.sendFile(path.join(__dirname, "public", "index.html"));
-    });
-
-    // Serve support.html on the '/support' path
-    app.get("/support", (req, res) => {
-      res.sendFile(path.join(__dirname, "public", "support.html"));
-    });
-    ```
-
-- **Starting the Server:**
-  - Make the server listen on a port (e.g., 3000) for incoming connections:
-    ```javascript
-    const PORT = 3000;
-    app.listen(PORT, () => {
-      console.log(`Server running on port ${PORT}`);
-    });
-    ```
-
-#### Step 3: Creating HTML Pages
-
-#### Creating the `public` Directory and `index.html` File
-
-- **Creating the `public` Directory:**
-   - The `public` directory will hold all your static files like HTML, CSS, and JavaScript.
-   - In your project's root directory, create the `public` directory:
-     ```bash
-     mkdir public
-     ```
-   - This command creates a new directory named `public`.
-
-- **Navigate to the `public` Directory:**
-   - Change into the `public` directory:
-     ```bash
-     cd public
-     ```
-
-- **Creating `index.html`:**
-   - Within the `public` directory, create a file named `index.html`.
-   - You can use a text editor or the following terminal command:
-     ```bash
-     new-item index.html
-     ```
-
-#### Adding Content to `index.html`
-
-- **Setting Up the HTML Structure:**
-   - Start with the basic HTML5 document structure. Include two `DOCTYPE` declarations for HTML5, the opening `<html>` tag with language attribute, `<head>`, and `<body>` sections.
-   - In the `<head>` section, add a title for your page and include the Bootstrap CSS link. This link connects your HTML file to the Bootstrap framework, enabling you to use its pre-designed components and styles.
-     ```html
-     <!DOCTYPE html>
-     <!DOCTYPE html>
-     <html lang="en">
-       <head>
-         <meta charset="UTF-8" />
-         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-         <title>Bootstrap Tutorial</title>
-         <!-- Link Bootstrap CSS -->
-         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-       </head>
-       <body>
-       ...
-       </body>
-     </html>
-     ```
-
-- **Bootstrap Navbar:**
-   - Inside the `<body>`, start with a Bootstrap navbar. This navbar includes a brand label, a collapsible hamburger menu for smaller screens, and navigation links.
-   - The `navbar-expand-sm` class makes the navbar collapsible on screens smaller than the 'sm' breakpoint. The `navbar-light` and `bg-light` classes style it with a light color theme.
-    ```html
-        <!-- Bootstrap Navbar -->
-    <nav class="navbar navbar-expand-sm navbar-light bg-light">
-      <a class="navbar-brand" href="#">Navbar</a>
-      <!-- This is the button that only appears when the on a small screen  -->
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <!-- These links will hide on a small screen but be present on a large one -->
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Contact</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-    ```
-- **Bootstrap Grid System:**
-   - Utilize Bootstrap's grid system to structure your page content. Start with a `container` class, which centers your content and adds margins.
-   - Inside the container, use `row` to create a horizontal grouping of columns.
-   - Then, add `col-12`, `col-sm-6`, and `col-md-4` classes to create responsive columns. The numbers indicate how many grid columns the element should span. For instance, `col-md-4` takes up 4 out of 12 columns on medium-sized screens and larger.
-    ```html
-            <!-- To use grid you create a div with a class of container -->
-    <div class="container">
-      <!-- Next we create a row -->
-      <div class="row">
-        <!-- Place elements in the row and specify how many columns they should occupy -->
-        <!-- There are 12 columns available -->
-        <div class="col-12">
-          <h1>Bootstrap Tutorial</h1>
-          <p>This is a hands-on tutorial for Bootstrap.</p>
-        </div>
-      </div>
-      <div class="row bg-light">
-        <div class="col-sm-6">
-          <h2>Bootstrap Grid System</h2>
-          <p>
-            Bootstrap's grid system allows up to 12 columns across the page. If
-            you take up 6 columns, you have 6 left. If you take up 3 columns,
-            you have 9 left.
-          </p>
-        </div>
-        <div class="col-sm-6">
-          <h2>Grid helps position elements</h2>
-          <p>
-            Here we have elements that take up 6 columns each next to each other
-            on a larger screen. If the screen is smaller, they stack on top of
-            each other. The sm controls when the elements will stack.
-          </p>
-        </div>
-      </div>
-      <!-- since md was used here these will stack at a larger size than sm -->
-      <div class="row">
-        <div class="col-md-4">
-          <h2>Column 1</h2>
-          <p>This is the content of column 1.</p>
-        </div>
-        <div class="col-md-4">
-          <h2>Column 2</h2>
-          <p>This is the content of column 2.</p>
-        </div>
-        <div class="col-md-4">
-          <h2>Column 3</h2>
-          <p>This is the content of column 3.</p>
-        </div>
-      </div>
-    ```
-
-- **Bootstrap Components - Buttons and Alert:**
-   - Add different styled buttons using `btn` classes like `btn-primary`, `btn-secondary`, and `btn-outline-primary`.
-   - Include an alert box using the `alert` and `alert-success` classes for a success message.
-    ```html
-              <!-- Bootstrap Buttons -->
-      <button class="btn btn-primary">Primary Button</button>
-      <button class="btn btn-secondary">Secondary Button</button>
-      <button class="btn btn-outline-primary">Outline Success</button>
-
-      <!-- Bootstrap Alert -->
-      <div class="alert alert-success" role="alert">
-        This is a success alert.
-      </div>
-    </div>
-    ```
-- **Linking Bootstrap JavaScript:**
-   - At the end of your `<body>`, include the Bootstrap JavaScript bundle. This script is necessary for interactive components like the collapsible navbar to function properly.
-     ```html
-     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-     ```
-
-##### Creating `support.html`
-
-- **Creating `support.html`:**
-   - Inside the `public` directory, you'll create a file named `support.html`.
-   - Use a text editor or the command line to create this file:
-     ```bash
-     new-item support.html
-     ```
-
-#### Adding Content to `support.html`
-
-- **Basic HTML Structure:**
-   - Begin with the standard HTML5 structure. Include `DOCTYPE`, the opening `<html>` tag with language attribute, `<head>`, and `<body>` sections.
-   - In the `<head>` section, add a title for your page and link Bootstrap’s CSS for styling.
-     ```html
-     <!DOCTYPE html>
-     <html lang="en">
-       <head>
-         <meta charset="UTF-8" />
-         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-         <title>Support Form</title>
-         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-       </head>
-       <body>
-       <!-- code for next step goes here -->
-       </body>
-     </html>
-     ```
-
-- **Bootstrap Container:**
-   - Use a `container` class to center your form on the page. Bootstrap's `container` class provides margins and proper alignment.
-     ```html
-     <div class="container">
-       <h2>Support Form</h2>
-      <!-- code for the nex step goes here -->
-     </div>
-     ```
-
-- **Creating the Form:**
-   - The `form` tag defines how data will be sent. In this case, it’s using the `GET` method to `/submitform`.
-   - Comments in the HTML explain that the data is sent via URL (not secure for sensitive data), and the `name` attribute in form elements corresponds to the data keys.
-     ```html
-     <form action="/submitform" method="get">
-        <div class="form-group">
-          <label for="name">Name</label>
-          <input
-            type="text"
-            class="form-control"
-            id="name"
-            name="name"
-            placeholder="Enter your name"
-          />
-        </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input
-            type="email"
-            class="form-control"
-            id="email"
-            name="email"
-            placeholder="Enter your email"
-          />
-        </div>
-        <div class="form-group">
-          <label for="message">Message</label>
-          <textarea
-            class="form-control"
-            id="message"
-            rows="3"
-            placeholder="Enter your message"
-            name="message"
-          ></textarea>
-        </div>
-        <div class="form-group">
-          <label for="date">Date</label>
-          <input
-            type="date"
-            class="form-control"
-            id="date"
-            name="date"
-            placeholder="Select a date"
-          />
-        </div>
-        <div class="form-group">
-          <label for="urgency">Urgency</label>
-          <select class="form-control" id="urgency" name="urgency">
-            <option value="low">Low</option>
-            <option value="medium">Medium</option>
-            <option value="high">High</option>
-          </select>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-     ```
-
-- **Form Input Elements:**
-   - Notice the use Bootstrap’s `form-group` and `form-control` classes to style your input fields.
-   - Each input field (like `text`, `email`, `textarea`, `date`, and `select`) is wrapped in a `div` with the class `form-group` for proper spacing and layout.
-   - The `class="form-control"` on each input element gives a consistent and attractive styling.
-   - The `name` attribute will determine the name of the property where the data will be sent. 
-
-- **Submit Button:**
-   - A submit button is included at the end of the form. The `btn` and `btn-primary` classes style it as a primary Bootstrap button.
-
-#### Step 4: Handling Form Submissions
-
-#### Setting Up Route for Form Submission
-- **Action:** Create a route to process form submissions.
-  - In `server.js`, add a route for form submission. Use the HTTP `GET` method to capture data from the query string.
-    ```javascript
-    app.get("/submitform", (req, res) => {
-      // Code to process form data
-      console.log(req.query);
-    });
-    ```
-  
-- **Action:** Get the data from the form and save it in a file.
-  - Use the `fs` (File System) module to write form data to a file.
-  - Implement error handling to manage file write operations.
-  - Send a response back to the user upon successful data handling.
-
-  Here is the expanded code for the `/submitform` endpoint:
-  ```javascript
-  const fs = require('fs');
-
-  app.get("/submitform", (req, res) => {
-    // Notice that the data from the form is in the request query object.
-    // The information is in the form of key-value pairs with the key
-    // being the name of the input field and the value being the value of the input field.
-    console.log(req.query);
-
-    // Let's save these values to a file and then send a response to the user.
-    fs.appendFile("formdata.txt", JSON.stringify(req.query) + '\n', (err) => {
-      if (err) {
-        console.error("Error writing to file", err);
-        res.status(500).send("An error occurred while processing your form.");
-        return;
+      const { MongoClient } = require("mongodb");
+      require("dotenv").config();
+      //get the connection string from the .env file
+      const CONNECTION_STRING = process.env.CONNECTION_STRING;
+      // create a new MongoClient
+      const client = new MongoClient(CONNECTION_STRING);
+      // connect to the database
+      try {
+        client.connect();
+        console.log("Connected to the database");
+      } 
+      catch (e) {
+        console.error(e);
       }
-      console.log("The data was appended to file!");
+    ```
+10. Run the following command to start the server.
+    ```powershell
+    npm run dev
+    ```
+11. You should see the message "Connected to the database" in the terminal.
+12. Lets run some querys on the air bnb sample data
+    ```javascript
+    // lets access the sample_airbnb database
+    const db = client.db("sample_airbnb");
+    const collection = db.collection("listingsAndReviews");
 
-      // Send a response back to the user.
-      res.send("Thank you for submitting the form");
-    });
-  });
-  ```
+    // lets find all the listings that have a review score of 100
+    const query = { "review_scores.review_scores_rating": 100 };
+    const cursor = collection.find(query);
+    // print the results
+    cursor.forEach(
+      function(doc) {
+        console.log(doc.name);
+      },
+      function(err) {
+        client.close();
+      }
+    );
+    ```
+13. You should see the names of the listings that have a review score of 100 in the terminal.
+14. Lets also filter by the property type
+    ```javascript
+    // lets find all the listings that have a review score of 100 and are a house
+    const query2 = { "review_scores.review_scores_rating": 100, "property_type": "House" };
+    const cursor2 = collection.find(query2);
+    // print the results
+    cursor2.forEach(
+      function(doc) {
+        console.log(doc.name);
+      },
+      function(err) {
+        client.close();
+      }
+    );
+    ```
+15. You should see the names of the listings that have a review score of 100 and are a house in the terminal.
+16. You can now run any query you want on the sample data.
+17. Explore the sample data and try running some different queries.
+18. Create a query that finds all the listings that have a review score of 100 and are in Sydney.
+19. Instead of outputting the names of the listings, output the url where the listing is located.
+18. Create a new commit with the message Guided Activity 5 Complete and push the changes to GitHub.
 
-#### Understanding the Code:
-- `fs.appendFile`: This method is used to append the form data to a file named `formdata.txt`. If the file doesn't exist, it will be created.
-- `JSON.stringify(req.query)`: Converts the query object into a string format for easy storage.
-- `res.send`: Sends a response back to the client.
-
-
-#### Step 5: Testing the Application
-
-- **Run Your Server:**
-   - Before you can run your server make sure that you are in the same director as server.cs
-            ```powershell
-                cd ..
-            ```
-   - Use the command `npm run dev` to start your server.
-
-2. **Test the Pages and Form:**
-   - Visit `http://localhost:3000` in a browser to view the `index.html` page.
-   - Go to `http://localhost:3000/support` to access the support form.
-   - Fill out the form with information and click submit.
-   - A `formdata.txt` file should have been created containing the information from the form.
-
-3. **Debugging:**
-   - Troubleshoot any issues by checking the server console and ensuring all routes are correctly set up.
-
-
-Create a new commit with the message Guided Activity 3 Complete and push the changes to GitHub
 
 
 If you have any questions about this assignment please reach out to myself or our TA for this course.

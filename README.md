@@ -71,16 +71,16 @@ MongoDB Atlas is a cloud-based database service that allows you to store and ret
 
 8. Click the option to connect via Visual Studio Code.
 9. The connection string will be displayed. Click the copy button to copy the connection string to your clipboard.
-10. You need to replace the password in the connection string with the password you created for your database.
+10. You need to replace the <password> in the connection string with the password you created for your database.
 11. Go back to Visual Studio Code and paste the connection string into the connection string box.
-12. Once you have pasted the connection string into the box, click the Connect button.
+12. Once you have pasted the connection string into the box, press enter to confirm.
 13. You should now be connected to your MongoDB Atlas cluster with the sample data loaded.
 
 <img src="Images/8.png" alt="Image showing air_bnb sample data" width="50%" />
 
 14. Click on the cluster and then the sample_airbnb database to see the collections in the database.
 15. There is a listingAndReviews collection that we will be using for the next part of the activity.
-16. Ckick on the listingAndReviews collection to see the data in the collection.
+16. Click on the listingAndReviews collection to see the data in the collection.
 17. Click on the Documents and then the first document to see the data in the document.
 18. Notice how similar the data is to a JSON object.
 
@@ -92,7 +92,6 @@ MongoDB Atlas is a cloud-based database service that allows you to store and ret
     mkdir server
     cd server
     npm init
-    new-item server.js
     ```
 3. Run the following command to install the MongoDB driver for Node.js and nodemon.
     ```powershell

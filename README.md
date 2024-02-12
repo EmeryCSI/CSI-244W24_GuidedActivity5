@@ -71,7 +71,7 @@ MongoDB Atlas is a cloud-based database service that allows you to store and ret
 
 8. Click the option to connect via Visual Studio Code.
 9. The connection string will be displayed. Click the copy button to copy the connection string to your clipboard.
-10. You need to replace the <password> in the connection string with the password you created for your database.
+10. You need to replace the `<password>` in the connection string with the password you created for your database.
 11. Go back to Visual Studio Code and paste the connection string into the connection string box.
 12. Once you have pasted the connection string into the box, press enter to confirm.
 13. You should now be connected to your MongoDB Atlas cluster with the sample data loaded.
